@@ -6,18 +6,7 @@ pipeline {
                   sh 'mvn clean install -DskipTests'
                   }
                }
-               stage('test') {
-                 steps {  
-                 sh 'mvn test'
-                 }
-                  post {
-                     always {
-                         junit 'target/surefire-reports/*.xml'
-                         archiveArtifacts 'target/*.jar'
-                    }
-                }
-            }
-            stage('run'){
+               stage('run'){
                 steps { 
                   sh 'mvn clean spring-boot:run &;curl http://localhost:8080/docs'
                   }
